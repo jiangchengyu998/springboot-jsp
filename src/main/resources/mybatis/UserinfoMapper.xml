@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.UserinfoDao">
+  <resultMap id="BaseResultMap" type="com.etc.entity.Userinfo">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="upass" jdbcType="VARCHAR" property="upass" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+  </resultMap>
+ <!-- <resultMap type="com.etc.entity.Userinfo" id="userandgoods">
+		<id property="uid" column="uid" />
+		
+		??? 此处的节点 放一个集合：元素 是 article 类型 的集合
+		<collection property="list" ofType="com.etc.entity.Commodity">
+			<id property="cid" column="cid" />主键
+			<result property="cinfo" column="cinfo" />
+			<result property="cprice" column="cprice" />
+			<result property="cname" column="cname" />
+			<result property="cnum" column="cnum" />
+			<result property="crelease" column="crelease" />
+			<result property="ccertification" column="ccertification" />
+			<result property="clocation" column="clocation" />
+			<result property="cimage" column="cimage" />
+			<result property="ctel" column="ctel" />
+			<result property="cqqorweixin" column="cqqorweixin" />
+				<result property="cclassification" column="cclassification" />
+			<result property="truename" column="truename" />
+			<result property="cschool" column="cschool" />
+		</collection> -->
+  <sql id="Base_Column_List">
+    uid, uname, upass, email, school
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from userinfo
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.etc.entity.Userinfo">
+    insert into userinfo (uid, uname, upass, 
+      email, school)
+    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{upass,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.etc.entity.Userinfo">
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="upass != null">
+        upass,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="school != null">
+        school,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upass != null">
+        #{upass,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etc.entity.Userinfo">
+    update userinfo
+    <set>
+      <if test="uname != null">
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="upass != null">
+        upass = #{upass,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null">
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etc.entity.Userinfo">
+    update userinfo
+    set uname = #{uname,jdbcType=VARCHAR},
+      upass = #{upass,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <select id="loginuser" resultType="java.lang.Integer" parameterType="com.etc.entity.Userinfo"
+  >
+  select count(*) from userinfo where 
+      uname = #{uname,jdbcType=VARCHAR} and
+      upass = #{upass,jdbcType=VARCHAR}
+  
+  </select>
+  <select id="finduserinfos" resultMap="BaseResultMap" parameterType="com.etc.entity.Userinfo">
+  select 
+  <include refid="Base_Column_List" />
+  from userinfo where uid =#{uid}
+ </select>
+ 
+ <select id="checkuname" resultType="java.lang.Integer" parameterType="com.etc.entity.Userinfo">
+  select count(*) from userinfo where 
+      uname = #{uname,jdbcType=VARCHAR}
+  
+  </select>
+  
+  <select id="showpass" resultType="java.lang.String" parameterType="com.etc.entity.Userinfo">
+  select upass from userinfo where 
+      email = #{email,jdbcType=VARCHAR}
+  
+  </select>
+  
+   <select id="checkemail" resultType="java.lang.Integer" parameterType="com.etc.entity.Userinfo">
+  select count(*) from userinfo where 
+      email = #{email,jdbcType=VARCHAR}
+  
+  </select>
+  
+  <select id="getuid" resultType="java.lang.Integer" parameterType="com.etc.entity.Userinfo">
+  select uid from userinfo where 
+      uname =#{uname}
+  
+  </select>
+  
+ 
+</mapper>

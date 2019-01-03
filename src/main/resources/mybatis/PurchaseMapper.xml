@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.PurchaseDao">
+  <resultMap id="BaseResultMap" type="com.etc.entity.Purchase">
+    <id column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="pprice" jdbcType="VARCHAR" property="pprice" />
+    <result column="prelease" jdbcType="TIMESTAMP" property="prelease" />
+    <result column="plocation" jdbcType="VARCHAR" property="plocation" />
+    <result column="ptel" jdbcType="VARCHAR" property="ptel" />
+    <result column="pqqorweixin" jdbcType="VARCHAR" property="pqqorweixin" />
+    <result column="pimage" jdbcType="VARCHAR" property="pimage" />
+    <result column="ptruename" jdbcType="VARCHAR" property="ptruename" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="pinfo" jdbcType="VARCHAR" property="pinfo" />
+    <result column="pschool" jdbcType="VARCHAR" property="pschool" />
+    <result column="pcertification" jdbcType="VARCHAR" property="pcertification" />
+    <result column="buyid" jdbcType="INTEGER" property="buyid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pid, pname, pprice, prelease, plocation, ptel, pqqorweixin, pimage, ptruename, uid, 
+    pinfo, pschool, pcertification, buyid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchase
+    where pid = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from purchase
+    where pid = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.etc.entity.Purchase">
+    insert into purchase (pid, pname, pprice, 
+      prelease, plocation, ptel, 
+      pqqorweixin, pimage, ptruename, 
+      uid, pinfo, pschool, 
+      pcertification, buyid)
+    values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{pprice,jdbcType=VARCHAR}, 
+      #{prelease,jdbcType=TIMESTAMP}, #{plocation,jdbcType=VARCHAR}, #{ptel,jdbcType=VARCHAR}, 
+      #{pqqorweixin,jdbcType=VARCHAR}, #{pimage,jdbcType=VARCHAR}, #{ptruename,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=INTEGER}, #{pinfo,jdbcType=VARCHAR}, #{pschool,jdbcType=VARCHAR}, 
+      #{pcertification,jdbcType=VARCHAR}, #{buyid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.etc.entity.Purchase">
+    insert into purchase
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="pprice != null">
+        pprice,
+      </if>
+      <if test="prelease != null">
+        prelease,
+      </if>
+      <if test="plocation != null">
+        plocation,
+      </if>
+      <if test="ptel != null">
+        ptel,
+      </if>
+      <if test="pqqorweixin != null">
+        pqqorweixin,
+      </if>
+      <if test="pimage != null">
+        pimage,
+      </if>
+      <if test="ptruename != null">
+        ptruename,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="pinfo != null">
+        pinfo,
+      </if>
+      <if test="pschool != null">
+        pschool,
+      </if>
+      <if test="pcertification != null">
+        pcertification,
+      </if>
+      <if test="buyid != null">
+        buyid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pprice != null">
+        #{pprice,jdbcType=VARCHAR},
+      </if>
+      <if test="prelease != null">
+        #{prelease,jdbcType=TIMESTAMP},
+      </if>
+      <if test="plocation != null">
+        #{plocation,jdbcType=VARCHAR},
+      </if>
+      <if test="ptel != null">
+        #{ptel,jdbcType=VARCHAR},
+      </if>
+      <if test="pqqorweixin != null">
+        #{pqqorweixin,jdbcType=VARCHAR},
+      </if>
+      <if test="pimage != null">
+        #{pimage,jdbcType=VARCHAR},
+      </if>
+      <if test="ptruename != null">
+        #{ptruename,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pinfo != null">
+        #{pinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="pschool != null">
+        #{pschool,jdbcType=VARCHAR},
+      </if>
+      <if test="pcertification != null">
+        #{pcertification,jdbcType=VARCHAR},
+      </if>
+      <if test="buyid != null">
+        #{buyid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etc.entity.Purchase">
+    update purchase
+    <set>
+      <if test="pname != null">
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pprice != null">
+        pprice = #{pprice,jdbcType=VARCHAR},
+      </if>
+      <if test="prelease != null">
+        prelease = #{prelease,jdbcType=TIMESTAMP},
+      </if>
+      <if test="plocation != null">
+        plocation = #{plocation,jdbcType=VARCHAR},
+      </if>
+      <if test="ptel != null">
+        ptel = #{ptel,jdbcType=VARCHAR},
+      </if>
+      <if test="pqqorweixin != null">
+        pqqorweixin = #{pqqorweixin,jdbcType=VARCHAR},
+      </if>
+      <if test="pimage != null">
+        pimage = #{pimage,jdbcType=VARCHAR},
+      </if>
+      <if test="ptruename != null">
+        ptruename = #{ptruename,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pinfo != null">
+        pinfo = #{pinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="pschool != null">
+        pschool = #{pschool,jdbcType=VARCHAR},
+      </if>
+      <if test="pcertification != null">
+        pcertification = #{pcertification,jdbcType=VARCHAR},
+      </if>
+      <if test="buyid != null">
+        buyid = #{buyid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etc.entity.Purchase">
+    update purchase
+    set pname = #{pname,jdbcType=VARCHAR},
+      pprice = #{pprice,jdbcType=VARCHAR},
+      prelease = #{prelease,jdbcType=TIMESTAMP},
+      plocation = #{plocation,jdbcType=VARCHAR},
+      ptel = #{ptel,jdbcType=VARCHAR},
+      pqqorweixin = #{pqqorweixin,jdbcType=VARCHAR},
+      pimage = #{pimage,jdbcType=VARCHAR},
+      ptruename = #{ptruename,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
+      pinfo = #{pinfo,jdbcType=VARCHAR},
+      pschool = #{pschool,jdbcType=VARCHAR},
+      pcertification = #{pcertification,jdbcType=VARCHAR},
+      buyid = #{buyid,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=INTEGER}
+  </update>
+  
+    <!--展示所有求购  -->
+  <select id="togood" resultMap="BaseResultMap">
+  select 
+    <include refid="Base_Column_List" />
+    from purchase
+     </select>
+     
+        <!--展示个人求购  -->
+  <select id="showbuy" resultMap="BaseResultMap">
+  select 
+    <include refid="Base_Column_List" />
+    from purchase where buyid =#{buyid}
+     </select>
+  
+</mapper>

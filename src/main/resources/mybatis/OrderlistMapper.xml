@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etc.dao.OrderlistDao">
+  <resultMap id="BaseResultMap" type="com.etc.entity.Orderlist">
+    <id column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="otel" jdbcType="VARCHAR" property="otel" />
+    <result column="oqqorweixin" jdbcType="VARCHAR" property="oqqorweixin" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    oid, name, address, otel, oqqorweixin, uid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from orderlist
+    where oid = #{oid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from orderlist
+    where oid = #{oid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.etc.entity.Orderlist" useGeneratedKeys="true" keyProperty="oid">
+    insert into orderlist (oid, name, address, 
+      otel, oqqorweixin, uid
+      )
+    values (#{oid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{otel,jdbcType=VARCHAR}, #{oqqorweixin,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.etc.entity.Orderlist">
+    insert into orderlist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oid != null">
+        oid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="otel != null">
+        otel,
+      </if>
+      <if test="oqqorweixin != null">
+        oqqorweixin,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oid != null">
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="otel != null">
+        #{otel,jdbcType=VARCHAR},
+      </if>
+      <if test="oqqorweixin != null">
+        #{oqqorweixin,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etc.entity.Orderlist">
+    update orderlist
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="otel != null">
+        otel = #{otel,jdbcType=VARCHAR},
+      </if>
+      <if test="oqqorweixin != null">
+        oqqorweixin = #{oqqorweixin,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etc.entity.Orderlist">
+    update orderlist
+    set name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      otel = #{otel,jdbcType=VARCHAR},
+      oqqorweixin = #{oqqorweixin,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER}
+    where oid = #{oid,jdbcType=INTEGER}
+  </update>
+ 
+  
+   <update id="orderuser" parameterType="com.etc.entity.Orderlist" >
+    update orderlist
+    set uid =#{uid} where oid = #{oid}
+  </update>
+  
+  <select id="showorder" resultMap="BaseResultMap" parameterType="com.etc.entity.Orderlist">
+  select 
+  <include refid="Base_Column_List" />
+    from orderlist where uid =#{uid}
+  
+  </select>
+</mapper>

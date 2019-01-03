@@ -1,36 +1,19 @@
 package com.hello.springboot.service;
 
-import com.hello.springboot.dao.AccountMapper;
 import com.hello.springboot.entity.Account;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * Created by fangzhipeng on 2017/4/20.
+ * Created by  on 2017/4/20.
  */
-@Service
-public class AccountService {
-    @Autowired
-    private AccountMapper accountMapper;
+public interface AccountService {
 
-    public int add(String name, double money) {
-        return accountMapper.add(name, money);
-    }
-    public int update(String name, double money, int id) {
-        return accountMapper.update(name, money, id);
-    }
-    public int delete(int id) {
-        return accountMapper.delete(id);
-    }
-    public Account findAccount(int id) {
-        return accountMapper.findAccount(id);
-    }
-    public List<Account> findAccountList() {
-        return accountMapper.findAccountList();
-    }
+    public int add(String name, double money);
+    public int update(String name, double money, int id);
+    public int delete(int id);
+    public Account findAccount(int id);
+    public List<Account> findAccountList();
 
-
-
+    int transfer(Integer to, Integer from, double money);
 }

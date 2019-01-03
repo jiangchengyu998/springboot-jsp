@@ -1,5 +1,6 @@
 package com.hello.springboot.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hello.springboot.entity.Account;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface AccountService {
     public List<Account> findAccountList();
 
     int transfer(Integer to, Integer from, double money);
+
+    PageInfo<Account> queryPage(int pageNum, int pageSize);
 }

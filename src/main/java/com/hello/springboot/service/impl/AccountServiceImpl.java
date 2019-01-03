@@ -1,5 +1,7 @@
 package com.hello.springboot.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hello.springboot.dao.AccountMapper;
 import com.hello.springboot.entity.Account;
 import com.hello.springboot.service.AccountService;
@@ -45,6 +47,14 @@ public class AccountServiceImpl  implements AccountService {
         accountMapper.update("", accountMapper.findAccount(to).getMoney() + money , to);
         result = 1;
         return result;
+    }
+
+    @Override
+    public PageInfo<Account> queryPage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<Account> list = accountMapper.findAccountList();
+        PageInfo<Account> pageInfo = new PageInfo<Account>(list);
+        return pageInfo;
     }
 
 }

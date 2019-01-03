@@ -1,5 +1,6 @@
 package com.hello.springboot.web;
 
+import com.github.pagehelper.PageInfo;
 import com.hello.springboot.entity.Account;
 import com.hello.springboot.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -113,6 +115,17 @@ public class AccountController {
         }
     }
 
-
+    /**
+     * 测试分页
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "page", method = RequestMethod.GET)
+    public PageInfo<Account> pageInfo(@RequestParam int pageNum, @RequestParam int pageSize){
+        PageInfo<Account> pageInfo = accountService.queryPage(pageNum, pageSize);
+        return pageInfo;
+    }
 
 }
